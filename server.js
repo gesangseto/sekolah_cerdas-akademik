@@ -1,6 +1,8 @@
+const dotenv = require('dotenv');
+dotenv.config();
 var express = require('express'),
     app = express(),
-    port = process.env.PORT || 3000,
+    port = process.env.PORT,
     bodyParser = require('body-parser');
 // controller = require('./app/controller');
 
@@ -11,4 +13,4 @@ var routes = require('./app/routes');
 routes(app);
 
 app.listen(port);
-console.log('Learn Node JS With Kiddy, RESTful API server started on: ' + port);
+console.log('RESTful API server started on: ' + port);
