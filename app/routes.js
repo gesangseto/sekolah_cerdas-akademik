@@ -25,12 +25,10 @@ module.exports = function (app) {
         .get(jadwal_kelas.get_mata_pelajaran);
     app.route('/akademik/jadwal_kelas/mata_pelajaran')
         .get(jadwal_kelas.mata_pelajaran);
-
     app.route('/akademik/jadwal_kelas/jadwal')
         .get(jadwal_kelas.jadwal);
     app.route('/akademik/jadwal_kelas/jadwal/:id')
         .get(jadwal_kelas.get_jadwal);
-
     app.route('/akademik/jadwal_kelas/jadwal')
         .post(jadwal_kelas.post_jadwal_kelas);
 
@@ -45,4 +43,13 @@ module.exports = function (app) {
     app.route('/akademik/wali_kelas')
         .delete(wali_kelas.delete_wali_kelas);
 
+
+    // Guru Matapelajaran Route
+    var guru_matapelajaran = require('./controller/guru_matapelajaran');
+    app.route('/akademik/guru_matapelajaran')
+        .get(guru_matapelajaran.guru_matapelajaran);
+    app.route('/akademik/guru_matapelajaran')
+        .post(guru_matapelajaran.post_guru_matapelajaran);
+    app.route('/akademik/guru_matapelajaran')
+        .delete(guru_matapelajaran.delete_guru_matapelajaran);
 };
