@@ -30,7 +30,9 @@ module.exports = function (app) {
     app.route('/akademik/jadwal_kelas/jadwal/:id')
         .get(jadwal_kelas.get_jadwal);
     app.route('/akademik/jadwal_kelas/jadwal')
-        .post(jadwal_kelas.post_jadwal_kelas);
+        .put(jadwal_kelas.insert_jadwal_kelas);
+    app.route('/akademik/jadwal_kelas/jadwal')
+        .post(jadwal_kelas.update_jadwal_kelas);
 
     // Wali Kelas Route
     var wali_kelas = require('./controller/wali_kelas');
@@ -39,7 +41,9 @@ module.exports = function (app) {
     app.route('/akademik/wali_kelas/:id')
         .get(wali_kelas.get_wali_kelas);
     app.route('/akademik/wali_kelas')
-        .post(wali_kelas.post_wali_kelas);
+        .post(wali_kelas.update_wali_kelas);
+    app.route('/akademik/wali_kelas')
+        .put(wali_kelas.insert_wali_kelas);
     app.route('/akademik/wali_kelas')
         .delete(wali_kelas.delete_wali_kelas);
 

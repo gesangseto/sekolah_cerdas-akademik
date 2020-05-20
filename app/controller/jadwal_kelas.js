@@ -220,7 +220,23 @@ exports.get_jadwal = function (req, res) {
         });
 };
 
-exports.post_jadwal_kelas = function (req, res) {
+exports.insert_jadwal_kelas = function (req, res) {
+    perf.start();
+    var total = 0;
+    req.body.forEach(element => {
+        // var query = "UPDATE `timetables` SET `start_time` = '" + element.data.start_time + "' ,`end_time` = '" + element.data.end_time + "' ,`room_no` = '" + element.data.room_no + "' WHERE `id`=" + element.id + ";"
+        connection.query("UPDATE `timetables` SET `start_time` = ? , `end_time`=?, `room_no`=? WHERE `id`=?",
+            [element.data.start_time, element.data.end_time, element.data.room_no, element.id], function (error, result, fields) {
+
+            });
+    })
+    messages = "Success";
+    elapseTime = perf.stop();
+    elapseTime = elapseTime.time.toFixed(2);
+    response.successPost(elapseTime, messages, res);
+
+};
+exports.update_jadwal_kelas = function (req, res) {
     perf.start();
     var total = 0;
     req.body.forEach(element => {

@@ -8,6 +8,8 @@ const perf = require('execution-time')();
 var dateFormat = require('dateformat');
 var datetime = require('node-datetime');
 
+let date_ob = new Date();
+
 var dt = datetime.create();
 var status_code = "";
 var messages = "";
@@ -17,7 +19,7 @@ exports.guru_matapelajaran = function (req, res) {
     perf.start();
     var total = 0;
     if (req.query.sub_kelas_id == undefined) {
-        connection.query("SELECT a.id AS id,a.class_section_id as class_section_id,a.session_id as session_id,a.subject_id as subject_id,a.teacher_id as teacher_id,b.name as subject_name,b.code as subject_code,b.type as subject_type,c.name as teacher_name,c.surname as teacher_surname,c.contact_no as teacher_contact_no,c.email as teacher_email FROM `teacher_subjects` AS a JOIN subjects AS b ON a.subject_id = b.id JOIN staff AS c ON a.teacher_id = c.id",
+        connection.query("SELECT a.id AS teacher_subject_id,a.class_section_id as sub_kelas_id,a.session_id as session_id,a.subject_id as matapelajaran_id,a.teacher_id as guru_id,b.name as nama_matapelajaran,b.code as code_matapelajaran,b.type as type_matapelajaran,c.name as nama_guru,c.surname as surname_guru,c.contact_no as contact_no_guru,c.email as email_guru FROM `teacher_subjects` AS a JOIN subjects AS b ON a.subject_id = b.id JOIN staff AS c ON a.teacher_id = c.id",
             function (error, result, fields) {
                 if (error) {
                     messages = "Internal server error";
@@ -35,7 +37,7 @@ exports.guru_matapelajaran = function (req, res) {
                 }
             });
     } else if (req.query.sub_kelas_id != undefined) {
-        connection.query("SELECT a.id AS id,a.session_id as session_id,a.class_section_id as class_section_id,a.subject_id as subject_id,a.teacher_id as teacher_id,b.name as subject_name,b.code as subject_code,b.type as subject_type,c.name as teacher_name,c.surname as teacher_surname,c.contact_no as teacher_contact_no,c.email as teacher_email FROM `teacher_subjects` AS a JOIN subjects AS b ON a.subject_id = b.id JOIN staff AS c ON a.teacher_id = c.id WHERE class_section_id=?",
+        connection.query("SELECT a.id AS teacher_subject_id,a.class_section_id as sub_kelas_id,a.session_id as session_id,a.subject_id as matapelajaran_id,a.teacher_id as guru_id,b.name as nama_matapelajaran,b.code as code_matapelajaran,b.type as type_matapelajaran,c.name as nama_guru,c.surname as surname_guru,c.contact_no as contact_no_guru,c.email as email_guru FROM `teacher_subjects` AS a JOIN subjects AS b ON a.subject_id = b.id JOIN staff AS c ON a.teacher_id = c.id WHERE class_section_id=?",
             [req.query.sub_kelas_id], function (error, result, fields) {
                 if (error) {
                     messages = "Internal server error";
@@ -62,63 +64,73 @@ exports.post_guru_matapelajaran = function (req, res) {
     var temp_message = {};
     var messages = [];
     if (req.body.sub_kelas_id != undefined && req.body.data != undefined) {
-        req.body.data.forEach(element => {
+        var class_section_id = req.body.sub_kelas_id
+        var data = req.body.data
+        data.forEach(element => {
             // jika elemen id tidak ada berarti ingin menambahkan data baru
-            if (element.id == undefined) {
-                // mencari data duplicate jika tambah baru
-                connection.query("SELECT * FROM teacher_subjects WHERE subject_id=? AND teacher_id=?", [element.subject_id, element.teacher_id],
-                    function (error, result, fields) {
-                        if (result.lenght > 0) {
-                            temp_message = {
-                                "subject_id": element.subject_id,
-                                "teacher_id": element.teacher_id,
-                                "messages": "Failed add data, Data already exists"
-                            }
-                        } else {
-                            connection.query("INSERT INTO teacher_subjects (class_section_id, subject_id, teacher_id)VALUES (?,?, ?, ?);",
-                                [req.body.sub_kelas_id, element.subject_id, element.teacher_id], function (error, result, fields) {
+
+            // get current session di sch_setting
+            connection.query("SELECT * FROM `sch_settings`;",
+                function (error, result, fields) {
+                    var session_id = result[0].session_id;
+
+                    if (element.id != undefined) {
+                        connection.query("SELECT count(*) as count FROM teacher_subjects WHERE session_id=? AND class_section_id=? AND subject_id=?",
+                            [session_id, class_section_id, element.matapelajaran_id],
+                            function (error, result, fields) {
+                                if (result[0].count > 1) {
                                     temp_message = {
-                                        "subject_id": element.subject_id,
-                                        "teacher_id": element.teacher_id,
-                                        "messages": "Success Input"
-                                    }
-                                });
-                        }
-                    });
-            }
-            else {
-                connection.query("SELECT * FROM teacher_subjects WHERE subject_id=? AND teacher_id=?", [element.subject_id, element.teacher_id],
-                    function (error, result, fields) {
-                        if (result.lenght > 1) {
-                            temp_message = {
-                                "subject_id": element.subject_id,
-                                "teacher_id": element.teacher_id,
-                                "messages": "Failed Update, Data already exists"
-                            }
-                        } else {
-                            connection.query("UPDATE `class_teacher` SET `subject_id`=?, `teacher_id`=? WHERE `id`=?;",
-                                [element.subject_id, element.teacher_id, element.id], function (error, result, fields) {
-                                    temp_message = {
-                                        "class_section_id": req.body.sub_kelas_id,
-                                        "subject_id": element.subject_id,
+                                        "subject_id": element.matapelajaran_id,
                                         "teacher_id": element.teacher_id,
                                         "messages": "Failed Update, Data already exists"
                                     }
-                                });
-                        }
-                    });
-            }
-            console.log(temp_message);
-            messages.push(temp_message);
-            total = total + 1;
-        });
+                                    console.log(temp_message);
+                                } else {
+                                    connection.query("UPDATE `teacher_subjects` SET `subject_id`=?, `teacher_id`=? WHERE `id`=?;",
+                                        [element.matapelajaran_id, element.guru_id, element.id], function (error, result, fields) {
+                                            temp_message = {
+                                                "class_section_id": class_section_id,
+                                                "subject_id": element.matapelajaran_id,
+                                                "teacher_id": element.guru_id,
+                                                "messages": "Success Update"
+                                            }
+                                            console.log(temp_message);
+                                        });
+                                }
+                            });
+                    } else {
+                        // mencari data duplicate jika tambah baru
+                        connection.query("SELECT count(*) as count FROM teacher_subjects WHERE session_id=? AND class_section_id=? AND subject_id=? ",
+                            [session_id, class_section_id, element.matapelajaran_id],
+                            function (error, result, fields) {
+                                if (result[0].count > 0) {
+                                    temp_message = {
+                                        "subject_id": element.matapelajaran_id,
+                                        "teacher_id": element.guru_id,
+                                        "messages": "Failed input data, Data already exists"
+                                    }
+                                    console.log(temp_message);
+                                } else {
+                                    connection.query("INSERT INTO teacher_subjects (id,session_id, class_section_id, subject_id, teacher_id) SELECT MAX(id)+1,?,?,?,? FROM teacher_subjects;",
+                                        [session_id, class_section_id, element.matapelajaran_id, element.guru_id], function (error, result, fields) {
+                                            temp_message = {
+                                                "subject_id": element.matapelajaran_id,
+                                                "teacher_id": element.guru_id,
+                                                "messages": "Success Input"
+                                            }
+                                            console.log(temp_message);
+                                        });
+                                }
+                            });
+                    }
+                });
 
+        });
+        messages = "Success Update";
         elapseTime = perf.stop();
         elapseTime = elapseTime.time.toFixed(2);
-        response.successGet(elapseTime, messages, res);
-
+        response.successPost(elapseTime, messages, res);
     }
-
 };
 
 

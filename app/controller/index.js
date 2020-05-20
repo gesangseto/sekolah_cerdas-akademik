@@ -135,7 +135,7 @@ exports.get_sub_kelas = function (req, res) {
 exports.guru_kelas = function (req, res) {
     perf.start();
     var total = 0;
-    connection.query("SELECT id, employee_id,department, name, surname,contact_no FROM staff WHERE employee_id <>''", function (error, result, fields) {
+    connection.query("SELECT id, employee_id,department, name, surname,contact_no FROM staff WHERE designation='1'", function (error, result, fields) {
         if (error) {
             messages = "Internal server error";
             elapseTime = perf.stop();
