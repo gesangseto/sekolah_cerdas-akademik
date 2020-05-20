@@ -69,4 +69,17 @@ module.exports = function (app) {
         .post(daftar_mata_pelajaran.update_mata_pelajaran);
     app.route('/akademik/daftar_mata_pelajaran')
         .delete(daftar_mata_pelajaran.delete_mata_pelajaran);
+
+    // Kelas
+    var kelas = require('./controller/kelas');
+    app.route('/akademik/list_kelas')
+        .get(kelas.list_kelas);
+    app.route('/akademik/list_kelas/:kelas_id')
+        .get(kelas.get_kelas);
+    app.route('/akademik/list_kelas')
+        .put(kelas.insert_kelas);
+    app.route('/akademik/list_kelas')
+        .post(kelas.update_kelas);
+    // app.route('/akademik/daftar_mata_pelajaran')
+    //     .delete(daftar_mata_pelajaran.delete_mata_pelajaran);
 };
