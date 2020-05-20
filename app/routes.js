@@ -48,12 +48,25 @@ module.exports = function (app) {
         .delete(wali_kelas.delete_wali_kelas);
 
 
-    // Guru Matapelajaran Route
-    var guru_matapelajaran = require('./controller/guru_matapelajaran');
-    app.route('/akademik/guru_matapelajaran')
-        .get(guru_matapelajaran.guru_matapelajaran);
-    app.route('/akademik/guru_matapelajaran')
-        .post(guru_matapelajaran.post_guru_matapelajaran);
-    app.route('/akademik/guru_matapelajaran')
-        .delete(guru_matapelajaran.delete_guru_matapelajaran);
+    // Guru mata_pelajaran Route
+    var guru_mata_pelajaran = require('./controller/guru_mata_pelajaran');
+    app.route('/akademik/guru_mata_pelajaran')
+        .get(guru_mata_pelajaran.guru_mata_pelajaran);
+    app.route('/akademik/guru_mata_pelajaran')
+        .post(guru_mata_pelajaran.post_guru_mata_pelajaran);
+    app.route('/akademik/guru_mata_pelajaran')
+        .delete(guru_mata_pelajaran.delete_guru_mata_pelajaran);
+
+    // Daftar Mata Pelajaran
+    var daftar_mata_pelajaran = require('./controller/daftar_mata_pelajaran');
+    app.route('/akademik/daftar_mata_pelajaran')
+        .get(daftar_mata_pelajaran.list_mata_pelajaran);
+    app.route('/akademik/daftar_mata_pelajaran/:id')
+        .get(daftar_mata_pelajaran.get_mata_pelajaran);
+    app.route('/akademik/daftar_mata_pelajaran')
+        .put(daftar_mata_pelajaran.insert_mata_pelajaran);
+    app.route('/akademik/daftar_mata_pelajaran')
+        .post(daftar_mata_pelajaran.update_mata_pelajaran);
+    app.route('/akademik/daftar_mata_pelajaran')
+        .delete(daftar_mata_pelajaran.delete_mata_pelajaran);
 };
