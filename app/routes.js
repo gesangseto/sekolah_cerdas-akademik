@@ -81,17 +81,17 @@ module.exports = function (app) {
         .delete(kelas.delete_kelas);
 
     // SubKelas
-    var kelas = require('./controller/sub_kelas');
-    // app.route('/akademik/list_sub_kelas')
-    //     .get(sub_kelas.list_sub_kelas);
-    // app.route('/akademik/list_sub_kelas/:sub_kelas_id')
-    //     .get(sub_kelas.list_sub_kelas);
-    // app.route('/akademik/list_sub_kelas')
-    //     .put(sub_kelas.insert_kelas);
-    // app.route('/akademik/list_sub_kelas')
-    //     .post(sub_kelas.update_kelas);
-    // app.route('/akademik/list_sub_kelas')
-    //     .delete(sub_kelas.delete_kelas);
+    var sub_kelas = require('./controller/sub_kelas');
+    app.route('/akademik/sub_kelas')
+        .get(sub_kelas.sub_kelas);
+    app.route('/akademik/sub_kelas/:sub_kelas_id')
+        .get(sub_kelas.get_sub_kelas);
+    app.route('/akademik/sub_kelas')
+        .put(sub_kelas.insert_sub_kelas);
+    app.route('/akademik/sub_kelas')
+        .post(sub_kelas.update_sub_kelas);
+    app.route('/akademik/sub_kelas')
+        .delete(sub_kelas.delete_sub_kelas);
 
 
 };

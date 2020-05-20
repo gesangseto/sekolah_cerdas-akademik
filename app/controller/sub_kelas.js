@@ -15,7 +15,7 @@ var status_code = "";
 var messages = "";
 var elapseTime = "";
 
-exports.list_sub_kelas = function (req, res) {
+exports.sub_kelas = function (req, res) {
     perf.start();
     var total = 0;
     connection.query("SELECT * FROM `sections`",
@@ -37,11 +37,12 @@ exports.list_sub_kelas = function (req, res) {
             }
         });
 };
-exports.get_kelas = function (req, res) {
+exports.get_sub_kelas = function (req, res) {
     perf.start();
     var total = 0;
+    var id = req.params.sub_kelas_id
     connection.query("SELECT * FROM `sections` WHERE id=?",
-        [req.params.kelas_id], function (error, result, fields) {
+        [id], function (error, result, fields) {
             if (error) {
                 messages = "Internal server error";
                 elapseTime = perf.stop();
@@ -61,7 +62,7 @@ exports.get_kelas = function (req, res) {
 };
 
 
-exports.insert_kelas = function (req, res) {
+exports.insert_sub_kelas = function (req, res) {
     perf.start();
     var total = 0;
     var section = req.body.sub_kelas_name
@@ -74,15 +75,15 @@ exports.insert_kelas = function (req, res) {
         connection.query("SELECT count(id) as count FROM sections WHERE section=?", [section],
             function (error, result, fields) {
                 if (result[0].count > 0) {
-                    messages = "Failed insert data, class already exists";
+                    messages = "Failed insert data, data already exists";
                     elapseTime = perf.stop();
                     elapseTime = elapseTime.time.toFixed(2);
                     response.successPost(elapseTime, messages, res);
                 } else {
-                    connection.query("INSERT INTO`sections` (`id`, `section`) SELECT MAX(id) + 1,? FROM sections",
+                    connection.query("INSERT INTO `sections` (`id`, `section`) SELECT MAX(id) + 1,? FROM sections",
                         [section],
                         function (error, result, fields) {
-                            messages = "Success Update data";
+                            messages = "Success Insert data";
                             elapseTime = perf.stop();
                             elapseTime = elapseTime.time.toFixed(2);
                             response.successPost(elapseTime, messages, res);
@@ -93,7 +94,7 @@ exports.insert_kelas = function (req, res) {
     }
 };
 
-exports.update_kelas = function (req, res) {
+exports.update_sub_kelas = function (req, res) {
     perf.start();
     var total = 0;
     var section = req.body.sub_kelas_name
@@ -108,40 +109,36 @@ exports.update_kelas = function (req, res) {
             [section, id],
             function (error, result, fields) {
                 if (result[0].count > 0) {
-                    messages = "Failed Update data, Section already exists";
+                    messages = "Failed Update data, data already exists";
                     elapseTime = perf.stop();
                     elapseTime = elapseTime.time.toFixed(2);
                     response.successPost(elapseTime, messages, res);
                 } else {
-                    connection.query("INSERT INTO `section`(`id`, `class_id`, `section_id`) SELECT MAX(id) + 1,?,? FROM class_sections",
-                        [req.body.class_id, element.section_id],
+                    connection.query("UPDATE `sections` SET `section`=? WHERE `id`=?",
+                        [section, id],
                         function (error, result, fields) {
                             messages = "Success Update data";
-                            console.log(messages)
+                            elapseTime = perf.stop();
+                            elapseTime = elapseTime.time.toFixed(2);
+                            response.successPost(elapseTime, messages, res);
                         });
-
-
                 }
             });
 
-        messages = "Success Update data";
-        elapseTime = perf.stop();
-        elapseTime = elapseTime.time.toFixed(2);
-        response.successPost(elapseTime, messages, res);
     }
 };
 
 
-exports.delete_kelas = function (req, res) {
+exports.delete_sub_kelas = function (req, res) {
     perf.start();
-    if (req.body.kelas_id == undefined) {
+    var id = req.body.sub_kelas_id
+    if (id == undefined) {
         messages = "Failed Delete, id cannot null";
         elapseTime = perf.stop();
         elapseTime = elapseTime.time.toFixed(2);
         response.successPost(elapseTime, messages, res);
     } else {
-        var id = req.body.kelas_id
-        connection.query('DELETE FROM class_sections WHERE class_id=?', [id],
+        connection.query('DELETE FROM sections WHERE id=?', [id],
             function (error, result, fields) {
                 if (error) {
                     messages = "Internal server error";

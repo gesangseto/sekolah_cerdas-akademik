@@ -1,0 +1,1269 @@
+{
+	"info": {
+		"_postman_id": "ac4bf961-2edd-4ebd-858e-105b2d0c8bd8",
+		"name": "Akademik",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Jadwal Kelas",
+			"item": [
+				{
+					"name": "View Kelas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/akademik/jadwal_kelas/kelas",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"akademik",
+								"jadwal_kelas",
+								"kelas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "View Sub Kelas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/akademik/jadwal_kelas/sub_kelas",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"akademik",
+								"jadwal_kelas",
+								"sub_kelas"
+							],
+							"query": [
+								{
+									"key": "id_kelas",
+									"value": "1",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Sub Kelas By KelasID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/akademik/jadwal_kelas/sub_kelas?kelas_id=12",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"akademik",
+								"jadwal_kelas",
+								"sub_kelas"
+							],
+							"query": [
+								{
+									"key": "kelas_id",
+									"value": "12"
+								},
+								{
+									"key": "id_kelas",
+									"value": "1",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "View Jadwal Kelas",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "localhost:3000/akademik/jadwal_kelas/jadwal?sub_kelas_id=1",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"akademik",
+								"jadwal_kelas",
+								"jadwal"
+							],
+							"query": [
+								{
+									"key": "sub_kelas_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Jadwal Kelas By SubKelasID",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "localhost:3000/akademik/jadwal_kelas/jadwal?sub_kelas_id=29",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"akademik",
+								"jadwal_kelas",
+								"jadwal"
+							],
+							"query": [
+								{
+									"key": "sub_kelas_id",
+									"value": "29"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "View Mata Pelajaran",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "sub_kelas_id",
+									"value": "1",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3000/akademik/jadwal_kelas/mata_pelajaran",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"akademik",
+								"jadwal_kelas",
+								"mata_pelajaran"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Mata Pelajaran By SubKelasID",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "sub_kelas_id",
+									"value": "1",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3000/akademik/jadwal_kelas/mata_pelajaran?sub_kelas_id=1",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"akademik",
+								"jadwal_kelas",
+								"mata_pelajaran"
+							],
+							"query": [
+								{
+									"key": "sub_kelas_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Jadwal Kelas By MataPelajaranID & SubKelasID",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "sub_kelas_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "mata_pelajaran_id",
+									"value": "3",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3000/akademik/jadwal_kelas/jadwal?sub_kelas_id=1&mata_pelajaran_id=14",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"akademik",
+								"jadwal_kelas",
+								"jadwal"
+							],
+							"query": [
+								{
+									"key": "sub_kelas_id",
+									"value": "1"
+								},
+								{
+									"key": "mata_pelajaran_id",
+									"value": "14"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Jadwal Kelas",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"id\": 400,\n        \"data\": {\n            \"start_time\": \"00:00\",\n            \"end_time\": \"01:00\",\n            \"room_no\": \"201\"\n        }\n    },\n    {\n        \"id\": 401,\n        \"data\": {\n            \"start_time\": \"12:00\",\n            \"end_time\": \"13:00\",\n            \"room_no\": \"200\"\n        }\n    }\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/akademik/jadwal_kelas/jadwal",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"akademik",
+								"jadwal_kelas",
+								"jadwal"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Insert Jadwal Kelas",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"id\": 400,\n        \"data\": {\n            \"start_time\": \"00:00\",\n            \"end_time\": \"01:00\",\n            \"room_no\": \"201\"\n        }\n    },\n    {\n        \"id\": 401,\n        \"data\": {\n            \"start_time\": \"12:00\",\n            \"end_time\": \"13:00\",\n            \"room_no\": \"200\"\n        }\n    }\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/akademik/jadwal_kelas/jadwal",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"akademik",
+								"jadwal_kelas",
+								"jadwal"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Wali Kelas",
+			"item": [
+				{
+					"name": "View Kelas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/akademik/jadwal_kelas/kelas",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"akademik",
+								"jadwal_kelas",
+								"kelas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "View Sub Kelas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/akademik/jadwal_kelas/sub_kelas",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"akademik",
+								"jadwal_kelas",
+								"sub_kelas"
+							],
+							"query": [
+								{
+									"key": "id_kelas",
+									"value": "1",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Sub Kelas By KelasID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/akademik/jadwal_kelas/sub_kelas?kelas_id=12",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"akademik",
+								"jadwal_kelas",
+								"sub_kelas"
+							],
+							"query": [
+								{
+									"key": "kelas_id",
+									"value": "12"
+								},
+								{
+									"key": "id_kelas",
+									"value": "1",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "View Guru Kelas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/akademik/wali_kelas/guru_kelas",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"akademik",
+								"wali_kelas",
+								"guru_kelas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Guru Kelas By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/akademik/wali_kelas/guru_kelas/3",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"akademik",
+								"wali_kelas",
+								"guru_kelas",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "View Wali Kelas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/akademik/wali_kelas",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"akademik",
+								"wali_kelas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Wali Kelas By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/akademik/wali_kelas/44",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"akademik",
+								"wali_kelas",
+								"44"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Wali Kelas",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "class_id",
+									"value": "47",
+									"type": "text"
+								},
+								{
+									"key": "staff_id",
+									"value": "16",
+									"type": "text"
+								},
+								{
+									"key": "section_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "id",
+									"value": "47",
+									"type": "text"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/akademik/wali_kelas",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"akademik",
+								"wali_kelas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Insert Wali Kelas",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "class_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "staff_id",
+									"value": "16",
+									"type": "text"
+								},
+								{
+									"key": "section_id",
+									"value": "1",
+									"type": "text"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/akademik/wali_kelas",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"akademik",
+								"wali_kelas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Wali Kelas",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "10",
+									"type": "text"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/akademik/wali_kelas",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"akademik",
+								"wali_kelas"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Guru Matapelajaran",
+			"item": [
+				{
+					"name": "View Kelas Copy",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/akademik/jadwal_kelas/kelas",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"akademik",
+								"jadwal_kelas",
+								"kelas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "View Sub Kelas Copy",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/akademik/jadwal_kelas/sub_kelas",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"akademik",
+								"jadwal_kelas",
+								"sub_kelas"
+							],
+							"query": [
+								{
+									"key": "id_kelas",
+									"value": "1",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Sub Kelas By KelasID Copy",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/akademik/jadwal_kelas/sub_kelas?kelas_id=12",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"akademik",
+								"jadwal_kelas",
+								"sub_kelas"
+							],
+							"query": [
+								{
+									"key": "kelas_id",
+									"value": "12"
+								},
+								{
+									"key": "id_kelas",
+									"value": "1",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "View guru matapelajaran",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:3000/akademik/guru_mata_pelajaran?sub_kelas_id=1",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"akademik",
+								"guru_mata_pelajaran"
+							],
+							"query": [
+								{
+									"key": "sub_kelas_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get guru matapelajaran By SubKelasID",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:3000/akademik/guru_mata_pelajaran?sub_kelas_id=1",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"akademik",
+								"guru_mata_pelajaran"
+							],
+							"query": [
+								{
+									"key": "sub_kelas_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update guru matapelajaran",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"sub_kelas_id\": 1,\n    \"data\": [\n        {\n            \"id\": 0,\n            \"matapelajaran_id\": 14,\n            \"guru_id\": 8\n        },\n        {\n            \"matapelajaran_id\": 1,\n            \"guru_id\": 4\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/akademik/guru_mata_pelajaran",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"akademik",
+								"guru_mata_pelajaran"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete guru matapelajaran",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "guru_matapelajaran_id",
+									"value": "4",
+									"type": "text"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/akademik/guru_mata_pelajaran",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"akademik",
+								"guru_mata_pelajaran"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Daftar Mata Pelajaran",
+			"item": [
+				{
+					"name": "View Mata Pelajaran",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/akademik/daftar_mata_pelajaran",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"akademik",
+								"daftar_mata_pelajaran"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Mata Pelajaran By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/akademik/daftar_mata_pelajaran/1",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"akademik",
+								"daftar_mata_pelajaran",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Insert Mata Pelajaran",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "type",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "code",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3000/akademik/daftar_mata_pelajaran",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"akademik",
+								"daftar_mata_pelajaran"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Mata Pelajaran",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Janda",
+									"type": "text"
+								},
+								{
+									"key": "type",
+									"value": "Teori",
+									"type": "text"
+								},
+								{
+									"key": "code",
+									"value": "MTKS",
+									"type": "text"
+								},
+								{
+									"key": "id",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3000/akademik/daftar_mata_pelajaran",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"akademik",
+								"daftar_mata_pelajaran"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteMata Pelajaran",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3000/akademik/daftar_mata_pelajaran",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"akademik",
+								"daftar_mata_pelajaran"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Kelas",
+			"item": [
+				{
+					"name": "View Kelas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/akademik/kelas",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"akademik",
+								"kelas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Kelas By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/akademik/kelas/8",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"akademik",
+								"kelas",
+								"8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Insert Kelas",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"class_id\": 1,\n    \"class\": \"Kelas 1\",\n    \"data\": [\n        {\n            \"section_id\": 1,\n            \"section\": \"A\"\n        },\n        {\n            \"section_id\": 2,\n            \"section\": \"B\"\n        },\n        {\n            \"section_id\": 3,\n            \"section\": \"C\"\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/akademik/kelas",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"akademik",
+								"kelas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Kelas",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"class_id\": 1,\n    \"class\": \"Kelas 1\",\n    \"data\": [\n        {\n            \"section_id\": 4,\n            \"section\": \"D\"\n        },\n        {\n            \"section_id\": 2,\n            \"section\": \"B\"\n        },\n        {\n            \"section_id\": 3,\n            \"section\": \"C\"\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/akademik/kelas",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"akademik",
+								"kelas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Kelas",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "kelas_id",
+									"value": "2",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3000/akademik/kelas",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"akademik",
+								"kelas"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Sub Kelas",
+			"item": [
+				{
+					"name": "View Sub Kelas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/akademik/sub_kelas",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"akademik",
+								"sub_kelas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Kelas By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/akademik/kelas/8",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"akademik",
+								"kelas",
+								"8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Insert Kelas",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"class_id\": 1,\n    \"class\": \"Kelas 1\",\n    \"data\": [\n        {\n            \"section_id\": 1,\n            \"section\": \"A\"\n        },\n        {\n            \"section_id\": 2,\n            \"section\": \"B\"\n        },\n        {\n            \"section_id\": 3,\n            \"section\": \"C\"\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/akademik/kelas",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"akademik",
+								"kelas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Kelas",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "5",
+									"type": "text"
+								},
+								{
+									"key": "sub_kelas_name",
+									"value": "A",
+									"type": "text"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/akademik/sub_kelas",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"akademik",
+								"sub_kelas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Kelas",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "kelas_id",
+									"value": "2",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3000/akademik/kelas",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"akademik",
+								"kelas"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
