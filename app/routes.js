@@ -6,21 +6,17 @@ module.exports = function (app) {
     var index = require('./controller/index');
     app.route('/')
         .get(index.index);
-    app.route('/akademik/kelas')
-        .get(index.kelas);
-    app.route('/akademik/kelas/:id')
-        .get(index.get_kelas);
-    app.route('/akademik/sub_kelas')
-        .get(index.sub_kelas);
-    app.route('/akademik/sub_kelas/:id')
-        .get(index.get_sub_kelas);
-    app.route('/akademik/guru_kelas')
-        .get(index.guru_kelas);
-    app.route('/akademik/guru_kelas/:id')
-        .get(index.get_guru_kelas);
 
     // Jadwal Kelas Route
     var jadwal_kelas = require('./controller/jadwal_kelas');
+    app.route('/akademik/jadwal_kelas/kelas')
+        .get(jadwal_kelas.kelas);
+    app.route('/akademik/jadwal_kelas/kelas/:id')
+        .get(jadwal_kelas.get_kelas);
+    app.route('/akademik/jadwal_kelas/sub_kelas')
+        .get(jadwal_kelas.sub_kelas);
+    app.route('/akademik/jadwal_kelas/sub_kelas/:id')
+        .get(jadwal_kelas.get_sub_kelas);
     app.route('/akademik/jadwal_kelas/mata_pelajaran/:id')
         .get(jadwal_kelas.get_mata_pelajaran);
     app.route('/akademik/jadwal_kelas/mata_pelajaran')
@@ -36,6 +32,10 @@ module.exports = function (app) {
 
     // Wali Kelas Route
     var wali_kelas = require('./controller/wali_kelas');
+    app.route('/akademik/wali_kelas/guru_kelas')
+        .get(wali_kelas.guru_kelas);
+    app.route('/akademik/wali_kelas/guru_kelas/:id')
+        .get(wali_kelas.get_guru_kelas);
     app.route('/akademik/wali_kelas')
         .get(wali_kelas.wali_kelas);
     app.route('/akademik/wali_kelas/:id')
@@ -72,14 +72,29 @@ module.exports = function (app) {
 
     // Kelas
     var kelas = require('./controller/kelas');
-    app.route('/akademik/list_kelas')
-        .get(kelas.list_kelas);
-    app.route('/akademik/list_kelas/:kelas_id')
+    app.route('/akademik/kelas')
+        .get(kelas.kelas);
+    app.route('/akademik/kelas/:kelas_id')
         .get(kelas.get_kelas);
-    app.route('/akademik/list_kelas')
+    app.route('/akademik/kelas')
         .put(kelas.insert_kelas);
-    app.route('/akademik/list_kelas')
+    app.route('/akademik/kelas')
         .post(kelas.update_kelas);
-    // app.route('/akademik/daftar_mata_pelajaran')
-    //     .delete(daftar_mata_pelajaran.delete_mata_pelajaran);
+    app.route('/akademik/kelas')
+        .delete(kelas.delete_kelas);
+
+    // SubKelas
+    var kelas = require('./controller/sub_kelas');
+    // app.route('/akademik/list_sub_kelas')
+    //     .get(sub_kelas.list_sub_kelas);
+    // app.route('/akademik/list_sub_kelas/:sub_kelas_id')
+    //     .get(sub_kelas.list_sub_kelas);
+    // app.route('/akademik/list_sub_kelas')
+    //     .put(sub_kelas.insert_kelas);
+    // app.route('/akademik/list_sub_kelas')
+    //     .post(sub_kelas.update_kelas);
+    // app.route('/akademik/list_sub_kelas')
+    //     .delete(sub_kelas.delete_kelas);
+
+
 };

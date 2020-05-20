@@ -13,6 +13,50 @@ var status_code = "";
 var messages = "";
 var elapseTime = "";
 
+exports.guru_kelas = function (req, res) {
+    perf.start();
+    var total = 0;
+    connection.query("SELECT id, employee_id,department, name, surname,contact_no FROM staff WHERE designation='1'", function (error, result, fields) {
+        if (error) {
+            messages = "Internal server error";
+            elapseTime = perf.stop();
+            elapseTime = elapseTime.time.toFixed(2);
+            response.error(elapseTime, messages, error, res);
+        } else {
+            result.forEach(element => {
+                total = total + 1;
+            })
+            messages = "Success";
+            elapseTime = perf.stop();
+            elapseTime = elapseTime.time.toFixed(2);
+            response.successGet(elapseTime, messages, total, result, res);
+        }
+    });
+};
+
+exports.get_guru_kelas = function (req, res) {
+    var total = 0;
+    var id = req.params.id
+    console.log(id)
+    connection.query("SELECT id, employee_id,department, name, surname,contact_no FROM staff WHERE id =?", [id],
+        function (error, result, fields) {
+            if (error) {
+                messages = "Internal server error";
+                elapseTime = perf.stop();
+                elapseTime = elapseTime.time.toFixed(2);
+                response.error(elapseTime, messages, error, res);
+            } else {
+                result.forEach(element => {
+                    total = total + 1;
+                })
+                messages = "Success";
+                elapseTime = perf.stop();
+                elapseTime = elapseTime.time.toFixed(2);
+                response.successGet(elapseTime, messages, total, result, res);
+            }
+        });
+};
+
 exports.wali_kelas = function (req, res) {
     perf.start();
     var total = 0;
