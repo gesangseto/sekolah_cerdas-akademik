@@ -3,9 +3,6 @@
 module.exports = function (app) {
 
     // Umum
-    var index = require('./controller/index');
-    app.route('/')
-        .get(index.index);
 
     // Jadwal Kelas Route
     var jadwal_kelas = require('./controller/jadwal_kelas');
