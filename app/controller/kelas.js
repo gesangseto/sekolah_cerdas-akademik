@@ -17,6 +17,11 @@ var elapseTime = "";
 
 exports.kelas = function (req, res) {
     perf.start();
+    console.log("date-time :" + new Date())
+    console.log("api-name : " + req.originalUrl)
+    console.log("body-sent : ")
+    console.log(req.body)
+
     var total = 0;
     connection.query("SELECT a.id AS id, a.class_id AS class_id ,a.section_id AS section_id, b.class AS class, c.section AS section FROM `class_sections` AS a JOIN classes AS b ON a.class_id=b.id JOIN sections AS c ON a.section_id=c.id ORDER BY class_id ASC",
         function (error, result, fields) {
@@ -28,7 +33,7 @@ exports.kelas = function (req, res) {
             } else {
                 result.forEach(element => {
                     total = total + 1;
-                    console.log(element)
+                    //console.log(element)
                 })
                 messages = "Success";
                 elapseTime = perf.stop();
@@ -39,6 +44,11 @@ exports.kelas = function (req, res) {
 };
 exports.get_kelas = function (req, res) {
     perf.start();
+    console.log("date-time :" + new Date())
+    console.log("api-name : " + req.originalUrl)
+    console.log("body-sent : ")
+    console.log(req.body)
+
     var total = 0;
     connection.query("SELECT a.id AS id, a.class_id AS class_id ,a.section_id AS section_id, b.class AS class, c.section AS section FROM `class_sections` AS a JOIN classes AS b ON a.class_id=b.id JOIN sections AS c ON a.section_id=c.id WHERE a.class_id=? ORDER BY class_id ASC",
         [req.params.kelas_id], function (error, result, fields) {
@@ -50,7 +60,7 @@ exports.get_kelas = function (req, res) {
             } else {
                 result.forEach(element => {
                     total = total + 1;
-                    console.log(element)
+                    //console.log(element)
                 })
                 messages = "Success";
                 elapseTime = perf.stop();
@@ -63,6 +73,11 @@ exports.get_kelas = function (req, res) {
 
 exports.insert_kelas = function (req, res) {
     perf.start();
+    console.log("date-time :" + new Date())
+    console.log("api-name : " + req.originalUrl)
+    console.log("body-sent : ")
+    console.log(req.body)
+
     var total = 0;
     if (req.body['class_id'] == undefined || req.body['class'] == undefined || req.body.data == undefined) {
         messages = "Failed insert data, data must fill";
@@ -85,7 +100,7 @@ exports.insert_kelas = function (req, res) {
                                     [req.body.class_id, element.section_id],
                                     function (error, result, fields) {
                                         messages = "Success Update data";
-                                        console.log(messages)
+                                        //console.log(messages)
                                     });
 
 
@@ -104,6 +119,11 @@ exports.insert_kelas = function (req, res) {
 
 exports.update_kelas = function (req, res) {
     perf.start();
+    console.log("date-time :" + new Date())
+    console.log("api-name : " + req.originalUrl)
+    console.log("body-sent : ")
+    console.log(req.body)
+
     var total = 0;
     if (req.body['class_id'] == undefined || req.body['class'] == undefined || req.body.data == undefined) {
         messages = "Failed insert data, data must fill";
@@ -126,7 +146,7 @@ exports.update_kelas = function (req, res) {
                                     [req.body.class_id, element.section_id],
                                     function (error, result, fields) {
                                         messages = "Success Update data";
-                                        console.log(messages)
+                                        //console.log(messages)
                                     });
 
 
@@ -146,6 +166,11 @@ exports.update_kelas = function (req, res) {
 
 exports.delete_kelas = function (req, res) {
     perf.start();
+    console.log("date-time :" + new Date())
+    console.log("api-name : " + req.originalUrl)
+    console.log("body-sent : ")
+    console.log(req.body)
+
     if (req.body.kelas_id == undefined) {
         messages = "Failed Delete, id cannot null";
         elapseTime = perf.stop();

@@ -17,6 +17,11 @@ var elapseTime = "";
 
 exports.sub_kelas = function (req, res) {
     perf.start();
+    console.log("date-time :" + new Date())
+    console.log("api-name : " + req.originalUrl)
+    console.log("body-sent : ")
+    console.log(req.body)
+
     var total = 0;
     connection.query("SELECT * FROM `sections`",
         function (error, result, fields) {
@@ -28,7 +33,7 @@ exports.sub_kelas = function (req, res) {
             } else {
                 result.forEach(element => {
                     total = total + 1;
-                    console.log(element)
+                    //console.log(element)
                 })
                 messages = "Success";
                 elapseTime = perf.stop();
@@ -39,6 +44,11 @@ exports.sub_kelas = function (req, res) {
 };
 exports.get_sub_kelas = function (req, res) {
     perf.start();
+    console.log("date-time :" + new Date())
+    console.log("api-name : " + req.originalUrl)
+    console.log("body-sent : ")
+    console.log(req.body)
+
     var total = 0;
     var id = req.params.sub_kelas_id
     connection.query("SELECT * FROM `sections` WHERE id=?",
@@ -51,7 +61,7 @@ exports.get_sub_kelas = function (req, res) {
             } else {
                 result.forEach(element => {
                     total = total + 1;
-                    console.log(element)
+                    //console.log(element)
                 })
                 messages = "Success";
                 elapseTime = perf.stop();
@@ -64,6 +74,11 @@ exports.get_sub_kelas = function (req, res) {
 
 exports.insert_sub_kelas = function (req, res) {
     perf.start();
+    console.log("date-time :" + new Date())
+    console.log("api-name : " + req.originalUrl)
+    console.log("body-sent : ")
+    console.log(req.body)
+
     var total = 0;
     var section = req.body.sub_kelas_name
     if (section == undefined) {
@@ -96,6 +111,11 @@ exports.insert_sub_kelas = function (req, res) {
 
 exports.update_sub_kelas = function (req, res) {
     perf.start();
+    console.log("date-time :" + new Date())
+    console.log("api-name : " + req.originalUrl)
+    console.log("body-sent : ")
+    console.log(req.body)
+
     var total = 0;
     var section = req.body.sub_kelas_name
     var id = req.body.id
@@ -131,6 +151,11 @@ exports.update_sub_kelas = function (req, res) {
 
 exports.delete_sub_kelas = function (req, res) {
     perf.start();
+    console.log("date-time :" + new Date())
+    console.log("api-name : " + req.originalUrl)
+    console.log("body-sent : ")
+    console.log(req.body)
+
     var id = req.body.sub_kelas_id
     if (id == undefined) {
         messages = "Failed Delete, id cannot null";

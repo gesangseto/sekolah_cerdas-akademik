@@ -15,6 +15,11 @@ var elapseTime = "";
 
 exports.guru_kelas = function (req, res) {
     perf.start();
+    console.log("date-time :" + new Date())
+    console.log("api-name : " + req.originalUrl)
+    console.log("body-sent : ")
+    console.log(req.body)
+
     var total = 0;
     connection.query("SELECT id, employee_id,department, name, surname,contact_no FROM staff WHERE designation='1'", function (error, result, fields) {
         if (error) {
@@ -36,8 +41,13 @@ exports.guru_kelas = function (req, res) {
 
 exports.get_guru_kelas = function (req, res) {
     var total = 0;
+    console.log("date-time :" + new Date())
+    console.log("api-name : " + req.originalUrl)
+    console.log("body-sent : ")
+    console.log(req.body)
+
     var id = req.params.id
-    console.log(id)
+    //console.log(id)
     connection.query("SELECT id, employee_id,department, name, surname,contact_no FROM staff WHERE id =?", [id],
         function (error, result, fields) {
             if (error) {
@@ -59,6 +69,11 @@ exports.get_guru_kelas = function (req, res) {
 
 exports.wali_kelas = function (req, res) {
     perf.start();
+    console.log("date-time :" + new Date())
+    console.log("api-name : " + req.originalUrl)
+    console.log("body-sent : ")
+    console.log(req.body)
+
     var total = 0;
     connection.query('SELECT a.* ,b.class AS class,c.section AS section, d.employee_id AS employee_id ,d.name as name, d.surname as surname, d.contact_no as contact_no,d.email as email FROM `class_teacher` AS a JOIN `classes` AS b ON a.class_id = b.id JOIN `sections` AS c ON a.section_id = c.id JOIN `staff` AS d ON a.staff_id = d.id ORDER BY a.class_id ASC',
         function (error, result, fields) {
@@ -83,9 +98,14 @@ exports.wali_kelas = function (req, res) {
 
 exports.get_wali_kelas = function (req, res) {
     perf.start();
+    console.log("date-time :" + new Date())
+    console.log("api-name : " + req.originalUrl)
+    console.log("body-sent : ")
+    console.log(req.body)
+
     var total = 0;
     var id = req.params.id;
-    console.log(id)
+    //console.log(id)
     connection.query('SELECT a.* ,b.class AS class,c.section AS section, d.employee_id AS employee_id ,d.name as name, d.surname as surname, d.contact_no as contact_no,d.email as email FROM `class_teacher` AS a JOIN `classes` AS b ON a.class_id = b.id JOIN `sections` AS c ON a.section_id = c.id JOIN `staff` AS d ON a.staff_id = d.id WHERE a.id =?',
         [id], function (error, result, fields) {
             if (error) {
@@ -107,6 +127,11 @@ exports.get_wali_kelas = function (req, res) {
 };
 exports.insert_wali_kelas = function (req, res) {
     perf.start();
+    console.log("date-time :" + new Date())
+    console.log("api-name : " + req.originalUrl)
+    console.log("body-sent : ")
+    console.log(req.body)
+
     var total = 0;
     if (req.body.class_id == undefined || req.body.staff_id == undefined || req.body.section_id == undefined) {
         messages = "Failed to post data, please fill all the requirment!";
@@ -117,7 +142,7 @@ exports.insert_wali_kelas = function (req, res) {
         connection.query("SELECT a.* ,b.class AS class,c.section AS section, d.employee_id AS employee_id ,d.name as name, d.surname as surname, d.contact_no as contact_no,d.email as email FROM `class_teacher` AS a JOIN `classes` AS b ON a.class_id = b.id JOIN `sections` AS c ON a.section_id = c.id JOIN `staff` AS d ON a.staff_id = d.id WHERE a.class_id=? AND a.staff_id=? AND a.section_id=?;",
             [req.body.class_id, req.body.staff_id, req.body.section_id], function (error, result, fields) {
 
-                console.log(result.length)
+                //console.log(result.length)
                 if (error) {
                     status_code = "500"
                     messages = "Internal server error";
@@ -153,6 +178,11 @@ exports.insert_wali_kelas = function (req, res) {
 };
 exports.update_wali_kelas = function (req, res) {
     perf.start();
+    console.log("date-time :" + new Date())
+    console.log("api-name : " + req.originalUrl)
+    console.log("body-sent : ")
+    console.log(req.body)
+
     var total = 0;
     if (req.body.class_id == undefined || req.body.staff_id == undefined || req.body.section_id == undefined || req.body.id == undefined || req.body.id == undefined) {
         messages = "Failed to post data, please fill all the requirment!";
@@ -164,7 +194,7 @@ exports.update_wali_kelas = function (req, res) {
         connection.query("SELECT a.* ,b.class AS class,c.section AS section, d.employee_id AS employee_id ,d.name as name, d.surname as surname, d.contact_no as contact_no,d.email as email FROM `class_teacher` AS a JOIN `classes` AS b ON a.class_id = b.id JOIN `sections` AS c ON a.section_id = c.id JOIN `staff` AS d ON a.staff_id = d.id WHERE a.class_id=? AND a.staff_id=? AND a.section_id=?;",
             [req.body.class_id, req.body.staff_id, req.body.section_id], function (error, result, fields) {
 
-                console.log(result.length)
+                //console.log(result.length)
                 if (error) {
                     status_code = "500"
                     messages = "Internal server error";
@@ -179,7 +209,7 @@ exports.update_wali_kelas = function (req, res) {
                     response.successGet(elapseTime, messages, total, result, res);
                 } else {
                     var id = req.body.id;
-                    console.log(id)
+                    //console.log(id)
                     connection.query("UPDATE `class_teacher` SET `class_id`=?, `staff_id`=?, `section_id`=? WHERE `id`=?",
                         [req.body.class_id, req.body.staff_id, req.body.section_id, req.body.id], function (error, result, fields) {
                             if (error) {
@@ -203,7 +233,12 @@ exports.update_wali_kelas = function (req, res) {
 
 exports.delete_wali_kelas = function (req, res) {
     perf.start();
+    console.log("date-time :" + new Date())
+    console.log("api-name : " + req.originalUrl)
+    console.log("body-sent : ")
     console.log(req.body)
+
+    //console.log(req.body)
     connection.query('DELETE FROM class_teacher WHERE id=?',
         [req.body.id], function (error, result, fields) {
             if (error) {

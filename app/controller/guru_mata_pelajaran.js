@@ -17,6 +17,11 @@ var elapseTime = "";
 
 exports.guru_mata_pelajaran = function (req, res) {
     perf.start();
+    console.log("date-time :" + new Date())
+    console.log("api-name : " + req.originalUrl)
+    console.log("body-sent : ")
+    console.log(req.body)
+
     var total = 0;
     if (req.query.sub_kelas_id == undefined) {
         connection.query("SELECT a.id AS teacher_subject_id,a.class_section_id as sub_kelas_id,a.session_id as session_id,a.subject_id as mata_pelajaran_id,a.teacher_id as guru_id,b.name as nama_mata_pelajaran,b.code as code_mata_pelajaran,b.type as type_mata_pelajaran,c.name as nama_guru,c.surname as surname_guru,c.contact_no as contact_no_guru,c.email as email_guru FROM `teacher_subjects` AS a JOIN subjects AS b ON a.subject_id = b.id JOIN staff AS c ON a.teacher_id = c.id",
@@ -60,6 +65,11 @@ exports.guru_mata_pelajaran = function (req, res) {
 
 exports.post_guru_mata_pelajaran = function (req, res) {
     perf.start();
+    console.log("date-time :" + new Date())
+    console.log("api-name : " + req.originalUrl)
+    console.log("body-sent : ")
+    console.log(req.body)
+
     var total = 0;
     var temp_message = {};
     var messages = [];
@@ -84,7 +94,7 @@ exports.post_guru_mata_pelajaran = function (req, res) {
                                         "teacher_id": element.teacher_id,
                                         "messages": "Failed Update, Data already exists"
                                     }
-                                    console.log(temp_message);
+                                    //console.log(temp_message);
                                 } else {
                                     connection.query("UPDATE `teacher_subjects` SET `subject_id`=?, `teacher_id`=? WHERE `id`=?;",
                                         [element.mata_pelajaran_id, element.guru_id, element.id], function (error, result, fields) {
@@ -94,7 +104,7 @@ exports.post_guru_mata_pelajaran = function (req, res) {
                                                 "teacher_id": element.guru_id,
                                                 "messages": "Success Update"
                                             }
-                                            console.log(temp_message);
+                                            //console.log(temp_message);
                                         });
                                 }
                             });
@@ -109,7 +119,7 @@ exports.post_guru_mata_pelajaran = function (req, res) {
                                         "teacher_id": element.guru_id,
                                         "messages": "Failed input data, Data already exists"
                                     }
-                                    console.log(temp_message);
+                                    //console.log(temp_message);
                                 } else {
                                     connection.query("INSERT INTO teacher_subjects (id,session_id, class_section_id, subject_id, teacher_id) SELECT MAX(id)+1,?,?,?,? FROM teacher_subjects;",
                                         [session_id, class_section_id, element.mata_pelajaran_id, element.guru_id], function (error, result, fields) {
@@ -118,7 +128,7 @@ exports.post_guru_mata_pelajaran = function (req, res) {
                                                 "teacher_id": element.guru_id,
                                                 "messages": "Success Input"
                                             }
-                                            console.log(temp_message);
+                                            //console.log(temp_message);
                                         });
                                 }
                             });
@@ -136,6 +146,11 @@ exports.post_guru_mata_pelajaran = function (req, res) {
 
 exports.delete_guru_mata_pelajaran = function (req, res) {
     perf.start();
+    console.log("date-time :" + new Date())
+    console.log("api-name : " + req.originalUrl)
+    console.log("body-sent : ")
+    console.log(req.body)
+
     var id = req.body.guru_mata_pelajaran_id
     if (req.body.guru_mata_pelajaran_id == undefined) {
         messages = "Failed Delete, id cannot null";

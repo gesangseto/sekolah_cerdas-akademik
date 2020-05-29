@@ -15,6 +15,11 @@ var elapseTime = "";
 
 exports.kelas = function (req, res) {
     perf.start();
+    console.log("date-time :" + new Date())
+    console.log("api-name : " + req.originalUrl)
+    console.log("body-sent : ")
+    console.log(req.body)
+
     var total = 0;
     connection.query('SELECT a.id AS kelas_id, a.* FROM classes AS a', function (error, result, fields) {
         if (error) {
@@ -37,6 +42,11 @@ exports.kelas = function (req, res) {
 };
 exports.get_kelas = function (req, res) {
     perf.start();
+    console.log("date-time :" + new Date())
+    console.log("api-name : " + req.originalUrl)
+    console.log("body-sent : ")
+    console.log(req.body)
+
     var total = 0;
     var id = req.params.id;
     connection.query('SELECT * FROM classes WHERE id =?', [id], function (error, result, fields) {
@@ -61,6 +71,11 @@ exports.get_kelas = function (req, res) {
 
 exports.sub_kelas = function (req, res) {
     perf.start();
+    console.log("date-time :" + new Date())
+    console.log("api-name : " + req.originalUrl)
+    console.log("body-sent : ")
+    console.log(req.body)
+
     var total = 0;
     var class_id = req.query.kelas_id
     if (class_id != undefined) {
@@ -84,7 +99,7 @@ exports.sub_kelas = function (req, res) {
                 }
             });
     } else {
-        // console.log(class_id);
+        // //console.log(class_id);
         connection.query('SELECT a.id AS id, b.id AS class_id,b.section AS section, b.created_at AS created_at, a.updated_at AS updated_at FROM class_sections AS a JOIN sections AS b on a.section_id = b.id',
             function (error, result, fields) {
                 if (error) {
@@ -108,9 +123,14 @@ exports.sub_kelas = function (req, res) {
 };
 exports.get_sub_kelas = function (req, res) {
     perf.start();
+    console.log("date-time :" + new Date())
+    console.log("api-name : " + req.originalUrl)
+    console.log("body-sent : ")
+    console.log(req.body)
+
     var total = 0;
     var id = req.params.id;
-    // console.log(class_id);
+    // //console.log(class_id);
     connection.query('SELECT a.id AS id, b.id AS class_id,b.section AS section, b.created_at AS created_at, a.updated_at AS updated_at FROM class_sections AS a JOIN sections AS b on a.section_id = b.id WHERE a.id=?',
         [id], function (error, result, fields) {
             if (error) {
@@ -135,6 +155,11 @@ exports.get_sub_kelas = function (req, res) {
 
 exports.mata_pelajaran = function (req, res) {
     perf.start();
+    console.log("date-time :" + new Date())
+    console.log("api-name : " + req.originalUrl)
+    console.log("body-sent : ")
+    console.log(req.body)
+
     var total = 0;
     if (req.query.sub_kelas_id == undefined) {
         connection.query('SELECT * FROM subjects',
@@ -180,6 +205,11 @@ exports.mata_pelajaran = function (req, res) {
 
 exports.get_mata_pelajaran = function (req, res) {
     perf.start();
+    console.log("date-time :" + new Date())
+    console.log("api-name : " + req.originalUrl)
+    console.log("body-sent : ")
+    console.log(req.body)
+
     var total = 0;
     var id = req.params.id;
     connection.query('SELECT * FROM subjects WHERE id=?',
@@ -202,8 +232,12 @@ exports.get_mata_pelajaran = function (req, res) {
 };
 
 exports.jadwal = function (req, res) {
-    console.log(req.query)
     perf.start();
+    console.log("date-time :" + new Date())
+    console.log("api-name : " + req.originalUrl)
+    console.log("body-sent : ")
+    console.log(req.body)
+
     var total = 0;
     if (req.query.mata_pelajaran_id != undefined && req.query.sub_kelas_id != undefined) {
         var sub_kelas_id = req.query.sub_kelas_id;
@@ -240,10 +274,10 @@ exports.jadwal = function (req, res) {
                             };
                         }
                         dataArray.push(data);
-                        // console.log(data);
+                        // //console.log(data);
 
                     })
-                    console.log(dataArray);
+                    //console.log(dataArray);
                     messages = "Success";
                     elapseTime = perf.stop();
                     elapseTime = elapseTime.time.toFixed(2);
@@ -286,10 +320,10 @@ exports.jadwal = function (req, res) {
                             };
                         }
                         dataArray.push(data);
-                        // console.log(data);
+                        // //console.log(data);
 
                     })
-                    console.log(dataArray);
+                    //console.log(dataArray);
                     messages = "Success";
                     elapseTime = perf.stop();
                     elapseTime = elapseTime.time.toFixed(2);
@@ -319,6 +353,11 @@ exports.jadwal = function (req, res) {
 
 exports.get_jadwal = function (req, res) {
     perf.start();
+    console.log("date-time :" + new Date())
+    console.log("api-name : " + req.originalUrl)
+    console.log("body-sent : ")
+    console.log(req.body)
+
     var total = 0;
     var id = req.params.id;
     connection.query('SELECT * FROM timetables WHERE id=?',
@@ -342,6 +381,11 @@ exports.get_jadwal = function (req, res) {
 
 exports.insert_jadwal_kelas = function (req, res) {
     perf.start();
+    console.log("date-time :" + new Date())
+    console.log("api-name : " + req.originalUrl)
+    console.log("body-sent : ")
+    console.log(req.body)
+
     var total = 0;
     req.body.forEach(element => {
         // var query = "UPDATE `timetables` SET `start_time` = '" + element.data.start_time + "' ,`end_time` = '" + element.data.end_time + "' ,`room_no` = '" + element.data.room_no + "' WHERE `id`=" + element.id + ";"
@@ -358,6 +402,11 @@ exports.insert_jadwal_kelas = function (req, res) {
 };
 exports.update_jadwal_kelas = function (req, res) {
     perf.start();
+    console.log("date-time :" + new Date())
+    console.log("api-name : " + req.originalUrl)
+    console.log("body-sent : ")
+    console.log(req.body)
+
     var total = 0;
     req.body.forEach(element => {
         // var query = "UPDATE `timetables` SET `start_time` = '" + element.data.start_time + "' ,`end_time` = '" + element.data.end_time + "' ,`room_no` = '" + element.data.room_no + "' WHERE `id`=" + element.id + ";"

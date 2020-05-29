@@ -17,6 +17,11 @@ var elapseTime = "";
 
 exports.list_mata_pelajaran = function (req, res) {
     perf.start();
+    console.log("date-time :" + new Date())
+    console.log("api-name : " + req.originalUrl)
+    console.log("body-sent : ")
+    console.log(req.body)
+
     var total = 0;
     connection.query("SELECT * FROM subjects",
         function (error, result, fields) {
@@ -38,6 +43,11 @@ exports.list_mata_pelajaran = function (req, res) {
 };
 exports.get_mata_pelajaran = function (req, res) {
     perf.start();
+    console.log("date-time :" + new Date())
+    console.log("api-name : " + req.originalUrl)
+    console.log("body-sent : ")
+    console.log(req.body)
+
     var total = 0;
     if (req.params.id == undefined) {
         messages = "Failed get data, id cannot null";
@@ -67,6 +77,11 @@ exports.get_mata_pelajaran = function (req, res) {
 
 exports.insert_mata_pelajaran = function (req, res) {
     perf.start();
+    console.log("date-time :" + new Date())
+    console.log("api-name : " + req.originalUrl)
+    console.log("body-sent : ")
+    console.log(req.body)
+
     var total = 0;
     if (req.body.name == undefined || req.body.type == undefined || req.body.code == undefined) {
         messages = "Failed insert data, data must fill";
@@ -97,6 +112,11 @@ exports.insert_mata_pelajaran = function (req, res) {
 
 exports.update_mata_pelajaran = function (req, res) {
     perf.start();
+    console.log("date-time :" + new Date())
+    console.log("api-name : " + req.originalUrl)
+    console.log("body-sent : ")
+    console.log(req.body)
+
     var total = 0;
     if (req.body.id == undefined || req.body.name == undefined || req.body.type == undefined || req.body.code == undefined) {
         messages = "Failed update data, data must fill";
@@ -127,6 +147,11 @@ exports.update_mata_pelajaran = function (req, res) {
 
 exports.delete_mata_pelajaran = function (req, res) {
     perf.start();
+    console.log("date-time :" + new Date())
+    console.log("api-name : " + req.originalUrl)
+    console.log("body-sent : ")
+    console.log(req.body)
+
     if (req.body.id == undefined) {
         messages = "Failed Delete, id cannot null";
         elapseTime = perf.stop();
