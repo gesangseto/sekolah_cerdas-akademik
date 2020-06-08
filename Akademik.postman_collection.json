@@ -2,7 +2,7 @@
 	"info": {
 		"_postman_id": "ac4bf961-2edd-4ebd-858e-105b2d0c8bd8",
 		"name": "Akademik",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
 	},
 	"item": [
 		{
@@ -13,18 +13,7 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": {
-							"raw": "localhost:3000/akademik/jadwal_kelas/kelas",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"akademik",
-								"jadwal_kelas",
-								"kelas"
-							]
-						}
+						"url": "localhost:3000/akademik/jadwal_kelas/kelas"
 					},
 					"response": []
 				},
@@ -171,18 +160,7 @@
 								}
 							]
 						},
-						"url": {
-							"raw": "localhost:3000/akademik/jadwal_kelas/mata_pelajaran",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"akademik",
-								"jadwal_kelas",
-								"mata_pelajaran"
-							]
-						}
+						"url": "localhost:3000/akademik/jadwal_kelas/mata_pelajaran"
 					},
 					"response": []
 				},
@@ -288,18 +266,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "localhost:3000/akademik/jadwal_kelas/jadwal",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"akademik",
-								"jadwal_kelas",
-								"jadwal"
-							]
-						}
+						"url": "localhost:3000/akademik/jadwal_kelas/jadwal"
 					},
 					"response": []
 				},
@@ -317,18 +284,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "localhost:3000/akademik/jadwal_kelas/jadwal",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"akademik",
-								"jadwal_kelas",
-								"jadwal"
-							]
-						}
+						"url": "localhost:3000/akademik/jadwal_kelas/jadwal"
 					},
 					"response": []
 				}
@@ -343,18 +299,7 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": {
-							"raw": "localhost:3000/akademik/jadwal_kelas/kelas",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"akademik",
-								"jadwal_kelas",
-								"kelas"
-							]
-						}
+						"url": "localhost:3000/akademik/jadwal_kelas/kelas"
 					},
 					"response": []
 				},
@@ -421,18 +366,7 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": {
-							"raw": "localhost:3000/akademik/wali_kelas/guru_kelas",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"akademik",
-								"wali_kelas",
-								"guru_kelas"
-							]
-						}
+						"url": "localhost:3000/akademik/wali_kelas/guru_kelas"
 					},
 					"response": []
 				},
@@ -441,19 +375,7 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": {
-							"raw": "localhost:3000/akademik/wali_kelas/guru_kelas/3",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"akademik",
-								"wali_kelas",
-								"guru_kelas",
-								"3"
-							]
-						}
+						"url": "localhost:3000/akademik/wali_kelas/guru_kelas/3"
 					},
 					"response": []
 				},
@@ -462,17 +384,7 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": {
-							"raw": "localhost:3000/akademik/wali_kelas",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"akademik",
-								"wali_kelas"
-							]
-						}
+						"url": "localhost:3000/akademik/wali_kelas"
 					},
 					"response": []
 				},
@@ -481,18 +393,7 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": {
-							"raw": "localhost:3000/akademik/wali_kelas/44",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"akademik",
-								"wali_kelas",
-								"44"
-							]
-						}
+						"url": "localhost:3000/akademik/wali_kelas/44"
 					},
 					"response": []
 				},
@@ -531,17 +432,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "localhost:3000/akademik/wali_kelas",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"akademik",
-								"wali_kelas"
-							]
-						}
+						"url": "localhost:3000/akademik/wali_kelas"
 					},
 					"response": []
 				},
@@ -575,17 +466,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "localhost:3000/akademik/wali_kelas",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"akademik",
-								"wali_kelas"
-							]
-						}
+						"url": "localhost:3000/akademik/wali_kelas"
 					},
 					"response": []
 				},
@@ -609,17 +490,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "localhost:3000/akademik/wali_kelas",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"akademik",
-								"wali_kelas"
-							]
-						}
+						"url": "localhost:3000/akademik/wali_kelas"
 					},
 					"response": []
 				}
@@ -634,18 +505,7 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": {
-							"raw": "localhost:3000/akademik/jadwal_kelas/kelas",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"akademik",
-								"jadwal_kelas",
-								"kelas"
-							]
-						}
+						"url": "localhost:3000/akademik/jadwal_kelas/kelas"
 					},
 					"response": []
 				},
@@ -785,17 +645,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "localhost:3000/akademik/guru_mata_pelajaran",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"akademik",
-								"guru_mata_pelajaran"
-							]
-						}
+						"url": "localhost:3000/akademik/guru_mata_pelajaran"
 					},
 					"response": []
 				},
@@ -819,17 +669,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "localhost:3000/akademik/guru_mata_pelajaran",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"akademik",
-								"guru_mata_pelajaran"
-							]
-						}
+						"url": "localhost:3000/akademik/guru_mata_pelajaran"
 					},
 					"response": []
 				}
@@ -844,17 +684,7 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": {
-							"raw": "localhost:3000/akademik/daftar_mata_pelajaran",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"akademik",
-								"daftar_mata_pelajaran"
-							]
-						}
+						"url": "localhost:3000/akademik/daftar_mata_pelajaran"
 					},
 					"response": []
 				},
@@ -863,18 +693,7 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": {
-							"raw": "localhost:3000/akademik/daftar_mata_pelajaran/1",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"akademik",
-								"daftar_mata_pelajaran",
-								"1"
-							]
-						}
+						"url": "localhost:3000/akademik/daftar_mata_pelajaran/1"
 					},
 					"response": []
 				},
@@ -903,17 +722,7 @@
 								}
 							]
 						},
-						"url": {
-							"raw": "localhost:3000/akademik/daftar_mata_pelajaran",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"akademik",
-								"daftar_mata_pelajaran"
-							]
-						}
+						"url": "localhost:3000/akademik/daftar_mata_pelajaran"
 					},
 					"response": []
 				},
@@ -947,17 +756,7 @@
 								}
 							]
 						},
-						"url": {
-							"raw": "localhost:3000/akademik/daftar_mata_pelajaran",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"akademik",
-								"daftar_mata_pelajaran"
-							]
-						}
+						"url": "localhost:3000/akademik/daftar_mata_pelajaran"
 					},
 					"response": []
 				},
@@ -976,17 +775,7 @@
 								}
 							]
 						},
-						"url": {
-							"raw": "localhost:3000/akademik/daftar_mata_pelajaran",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"akademik",
-								"daftar_mata_pelajaran"
-							]
-						}
+						"url": "localhost:3000/akademik/daftar_mata_pelajaran"
 					},
 					"response": []
 				}
@@ -1001,17 +790,7 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": {
-							"raw": "localhost:3000/akademik/kelas",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"akademik",
-								"kelas"
-							]
-						}
+						"url": "localhost:3000/akademik/kelas"
 					},
 					"response": []
 				},
@@ -1020,18 +799,7 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": {
-							"raw": "localhost:3000/akademik/kelas/8",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"akademik",
-								"kelas",
-								"8"
-							]
-						}
+						"url": "localhost:3000/akademik/kelas/8"
 					},
 					"response": []
 				},
@@ -1049,17 +817,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "localhost:3000/akademik/kelas",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"akademik",
-								"kelas"
-							]
-						}
+						"url": "localhost:3000/akademik/kelas"
 					},
 					"response": []
 				},
@@ -1077,17 +835,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "localhost:3000/akademik/kelas",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"akademik",
-								"kelas"
-							]
-						}
+						"url": "localhost:3000/akademik/kelas"
 					},
 					"response": []
 				},
@@ -1106,17 +854,7 @@
 								}
 							]
 						},
-						"url": {
-							"raw": "localhost:3000/akademik/kelas",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"akademik",
-								"kelas"
-							]
-						}
+						"url": "localhost:3000/akademik/kelas"
 					},
 					"response": []
 				}
@@ -1131,17 +869,7 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": {
-							"raw": "localhost:3000/akademik/sub_kelas",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"akademik",
-								"sub_kelas"
-							]
-						}
+						"url": "localhost:3000/akademik/sub_kelas"
 					},
 					"response": []
 				},
@@ -1150,18 +878,7 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": {
-							"raw": "localhost:3000/akademik/kelas/8",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"akademik",
-								"kelas",
-								"8"
-							]
-						}
+						"url": "localhost:3000/akademik/kelas/8"
 					},
 					"response": []
 				},
@@ -1179,17 +896,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "localhost:3000/akademik/kelas",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"akademik",
-								"kelas"
-							]
-						}
+						"url": "localhost:3000/akademik/kelas"
 					},
 					"response": []
 				},
@@ -1218,17 +925,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "localhost:3000/akademik/sub_kelas",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"akademik",
-								"sub_kelas"
-							]
-						}
+						"url": "localhost:3000/akademik/sub_kelas"
 					},
 					"response": []
 				},
@@ -1247,17 +944,7 @@
 								}
 							]
 						},
-						"url": {
-							"raw": "localhost:3000/akademik/kelas",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"akademik",
-								"kelas"
-							]
-						}
+						"url": "localhost:3000/akademik/kelas"
 					},
 					"response": []
 				}

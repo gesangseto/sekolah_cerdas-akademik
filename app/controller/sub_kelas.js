@@ -23,13 +23,19 @@ exports.sub_kelas = function (req, res) {
     console.log(req.body)
 
     var total = 0;
-    connection.query("SELECT * FROM `sections`",
+    var sql = "SELECT * FROM `sections`"
+    if (req.query.page != undefined && req.query.limit != undefined) {
+        var page = req.query.page, limit = req.query.limit
+        var offset = (page - 1) * limit;
+        sql = sql + ` LIMIT ` + offset + `, ` + limit
+    }
+    connection.query(sql,
         function (error, result, fields) {
             if (error) {
                 messages = "Internal server error";
                 elapseTime = perf.stop();
                 elapseTime = elapseTime.time.toFixed(2);
-                response.errorRes(elapseTime, messages, res);
+                response.errorRes(500, elapseTime, messages, res);
             } else {
                 result.forEach(element => {
                     total = total + 1;
@@ -57,7 +63,7 @@ exports.get_sub_kelas = function (req, res) {
                 messages = "Internal server error";
                 elapseTime = perf.stop();
                 elapseTime = elapseTime.time.toFixed(2);
-                response.errorRes(elapseTime, messages, res);
+                response.errorRes(500, elapseTime, messages, res);
             } else {
                 result.forEach(element => {
                     total = total + 1;
@@ -85,7 +91,7 @@ exports.insert_sub_kelas = function (req, res) {
         messages = "Failed insert data, data must fill";
         elapseTime = perf.stop();
         elapseTime = elapseTime.time.toFixed(2);
-        response.successPost(elapseTime, messages, res);
+        response.errorRes(400, elapseTime, messages, res);
     } else {
         connection.query("SELECT count(id) as count FROM sections WHERE section=?", [section],
             function (error, result, fields) {
@@ -93,7 +99,7 @@ exports.insert_sub_kelas = function (req, res) {
                     messages = "Failed insert data, data already exists";
                     elapseTime = perf.stop();
                     elapseTime = elapseTime.time.toFixed(2);
-                    response.successPost(elapseTime, messages, res);
+                    response.errorRes(500, elapseTime, messages, res);
                 } else {
                     connection.query("INSERT INTO `sections` (`id`, `section`) SELECT MAX(id) + 1,? FROM sections",
                         [section],
@@ -123,7 +129,7 @@ exports.update_sub_kelas = function (req, res) {
         messages = "Failed update data, data must fill";
         elapseTime = perf.stop();
         elapseTime = elapseTime.time.toFixed(2);
-        response.successPost(elapseTime, messages, res);
+        response.errorRes(400, elapseTime, messages, res);
     } else {
         connection.query("SELECT count(id) as count FROM sections WHERE section=? AND id!=?",
             [section, id],
@@ -132,7 +138,7 @@ exports.update_sub_kelas = function (req, res) {
                     messages = "Failed Update data, data already exists";
                     elapseTime = perf.stop();
                     elapseTime = elapseTime.time.toFixed(2);
-                    response.successPost(elapseTime, messages, res);
+                    response.errorRes(500, elapseTime, messages, res);
                 } else {
                     connection.query("UPDATE `sections` SET `section`=? WHERE `id`=?",
                         [section, id],
@@ -161,7 +167,7 @@ exports.delete_sub_kelas = function (req, res) {
         messages = "Failed Delete, id cannot null";
         elapseTime = perf.stop();
         elapseTime = elapseTime.time.toFixed(2);
-        response.successPost(elapseTime, messages, res);
+        response.errorRes(400, elapseTime, messages, res);
     } else {
         connection.query('DELETE FROM sections WHERE id=?', [id],
             function (error, result, fields) {
@@ -169,7 +175,7 @@ exports.delete_sub_kelas = function (req, res) {
                     messages = "Internal server error";
                     elapseTime = perf.stop();
                     elapseTime = elapseTime.time.toFixed(2);
-                    response.errorRes(elapseTime, messages, res);
+                    response.errorRes(500, elapseTime, messages, res);
                 } else {
                     messages = "Success Delete";
                     elapseTime = perf.stop();

@@ -13,9 +13,9 @@ exports.error = function (time, messages, error, res) {
     res.end();
 };
 
-exports.errorRes = function (time, messages, res) {
+exports.errorRes = function (statusCode, time, messages, res) {
     var data = {
-        'statusCode': "500",
+        'statusCode': statusCode,
         'elapsedTime': time,
         'messages': messages
     };

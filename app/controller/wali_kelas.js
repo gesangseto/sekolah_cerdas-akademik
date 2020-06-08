@@ -26,7 +26,7 @@ exports.guru_kelas = function (req, res) {
             messages = "Internal server error";
             elapseTime = perf.stop();
             elapseTime = elapseTime.time.toFixed(2);
-            response.error(elapseTime, messages, error, res);
+            response.errorRes(500, elapseTime, messages, res);
         } else {
             result.forEach(element => {
                 total = total + 1;
@@ -54,7 +54,7 @@ exports.get_guru_kelas = function (req, res) {
                 messages = "Internal server error";
                 elapseTime = perf.stop();
                 elapseTime = elapseTime.time.toFixed(2);
-                response.error(elapseTime, messages, error, res);
+                response.errorRes(500, elapseTime, messages, res);
             } else {
                 result.forEach(element => {
                     total = total + 1;
@@ -81,8 +81,8 @@ exports.wali_kelas = function (req, res) {
                 status_code = "500"
                 messages = "Internal server error";
                 elapseTime = perf.stop();
-                time = elapseTime.time.toFixed(2);
-                response.error(status_code, time, messages, error, res);
+                elapseTime = elapseTime.time.toFixed(2);
+                response.errorRes(500, elapseTime, messages, res);
             } else {
                 result.forEach(element => {
                     total = total + 1;
@@ -109,11 +109,10 @@ exports.get_wali_kelas = function (req, res) {
     connection.query('SELECT a.* ,b.class AS class,c.section AS section, d.employee_id AS employee_id ,d.name as name, d.surname as surname, d.contact_no as contact_no,d.email as email FROM `class_teacher` AS a JOIN `classes` AS b ON a.class_id = b.id JOIN `sections` AS c ON a.section_id = c.id JOIN `staff` AS d ON a.staff_id = d.id WHERE a.id =?',
         [id], function (error, result, fields) {
             if (error) {
-                status_code = "500"
                 messages = "Internal server error";
                 elapseTime = perf.stop();
-                time = elapseTime.time.toFixed(2);
-                response.error(status_code, time, messages, error, res);
+                elapseTime = elapseTime.time.toFixed(2);
+                response.errorRes(500, elapseTime, messages, res);
             } else {
                 result.forEach(element => {
                     total = total + 1;
@@ -137,33 +136,30 @@ exports.insert_wali_kelas = function (req, res) {
         messages = "Failed to post data, please fill all the requirment!";
         elapseTime = perf.stop();
         elapseTime = elapseTime.time.toFixed(2);
-        response.successPost(elapseTime, messages, res);
+        response.errorRes(400, elapseTime, messages, res);
     } else {
         connection.query("SELECT a.* ,b.class AS class,c.section AS section, d.employee_id AS employee_id ,d.name as name, d.surname as surname, d.contact_no as contact_no,d.email as email FROM `class_teacher` AS a JOIN `classes` AS b ON a.class_id = b.id JOIN `sections` AS c ON a.section_id = c.id JOIN `staff` AS d ON a.staff_id = d.id WHERE a.class_id=? AND a.staff_id=? AND a.section_id=?;",
             [req.body.class_id, req.body.staff_id, req.body.section_id], function (error, result, fields) {
 
                 //console.log(result.length)
                 if (error) {
-                    status_code = "500"
                     messages = "Internal server error";
                     elapseTime = perf.stop();
-                    time = elapseTime.time.toFixed(2);
-                    response.error(status_code, time, messages, error, res);
+                    elapseTime = elapseTime.time.toFixed(2);
+                    response.errorRes(500, elapseTime, messages, res);
                 } else if (result.length > 0) {
                     messages = "Record already exists";
                     elapseTime = perf.stop();
                     elapseTime = elapseTime.time.toFixed(2);
-                    total = result.length;
-                    response.successGet(elapseTime, messages, total, result, res);
+                    response.errorRes(400, elapseTime, messages, res);
                 } else {
                     connection.query("INSERT INTO class_teacher (class_id, staff_id, section_id)VALUES (?, ?, ?);",
                         [req.body.class_id, req.body.staff_id, req.body.section_id], function (error, result, fields) {
                             if (error) {
-                                status_code = "500"
                                 messages = "Internal server error";
                                 elapseTime = perf.stop();
-                                time = elapseTime.time.toFixed(2);
-                                response.error(status_code, time, messages, error, res);
+                                elapseTime = elapseTime.time.toFixed(2);
+                                response.errorRes(500, elapseTime, messages, res);
                             } else {
                                 messages = "Success Insert Data";
                                 elapseTime = perf.stop();
@@ -188,7 +184,7 @@ exports.update_wali_kelas = function (req, res) {
         messages = "Failed to post data, please fill all the requirment!";
         elapseTime = perf.stop();
         elapseTime = elapseTime.time.toFixed(2);
-        response.successPost(elapseTime, messages, res);
+        response.errorRes(400, elapseTime, messages, res);
     }
     else {
         connection.query("SELECT a.* ,b.class AS class,c.section AS section, d.employee_id AS employee_id ,d.name as name, d.surname as surname, d.contact_no as contact_no,d.email as email FROM `class_teacher` AS a JOIN `classes` AS b ON a.class_id = b.id JOIN `sections` AS c ON a.section_id = c.id JOIN `staff` AS d ON a.staff_id = d.id WHERE a.class_id=? AND a.staff_id=? AND a.section_id=?;",
@@ -205,19 +201,17 @@ exports.update_wali_kelas = function (req, res) {
                     messages = "Record already exists";
                     elapseTime = perf.stop();
                     elapseTime = elapseTime.time.toFixed(2);
-                    total = result.length;
-                    response.successGet(elapseTime, messages, total, result, res);
+                    response.errorRes(400, elapseTime, messages, res);
                 } else {
                     var id = req.body.id;
                     //console.log(id)
                     connection.query("UPDATE `class_teacher` SET `class_id`=?, `staff_id`=?, `section_id`=? WHERE `id`=?",
                         [req.body.class_id, req.body.staff_id, req.body.section_id, req.body.id], function (error, result, fields) {
                             if (error) {
-                                status_code = "500"
                                 messages = "Internal server error";
                                 elapseTime = perf.stop();
-                                time = elapseTime.time.toFixed(2);
-                                response.error(status_code, time, messages, error, res);
+                                elapseTime = elapseTime.time.toFixed(2);
+                                response.errorRes(500, elapseTime, messages, res);
                             } else {
                                 messages = "Success Update Data";
                                 elapseTime = perf.stop();
@@ -242,11 +236,10 @@ exports.delete_wali_kelas = function (req, res) {
     connection.query('DELETE FROM class_teacher WHERE id=?',
         [req.body.id], function (error, result, fields) {
             if (error) {
-                status_code = "500"
                 messages = "Internal server error";
                 elapseTime = perf.stop();
-                time = elapseTime.time.toFixed(2);
-                response.error(status_code, time, messages, error, res);
+                elapseTime = elapseTime.time.toFixed(2);
+                response.errorRes(500, elapseTime, messages, res);
             } else {
                 messages = "SuccessDelete";
                 elapseTime = perf.stop();
