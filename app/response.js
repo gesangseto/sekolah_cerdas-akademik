@@ -1,23 +1,11 @@
 'use strict';
 
-exports.error = function (time, messages, error, res) {
-    var data = {
-        'statusCode': "500",
-        'elapsedTime': time,
-        'messages': messages,
-        'error': error
-    };
-    console.log("response : ");
-    console.log(data);
-    res.json(data);
-    res.end();
-};
-
-exports.errorRes = function (statusCode, time, messages, res) {
+exports.error = function (statusCode, time, messages, error, res) {
     var data = {
         'statusCode': statusCode,
         'elapsedTime': time,
-        'messages': messages
+        'messages': messages,
+        'error': error
     };
     console.log("response : ");
     console.log(data);

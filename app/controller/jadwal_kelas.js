@@ -13,7 +13,7 @@ var status_code = "";
 var messages = "";
 var elapseTime = "";
 
-exports.kelas = function (req, res) {
+exports.classes = function (req, res) {
     perf.start();
     console.log("date-time :" + new Date())
     console.log("api-name : " + req.originalUrl)
@@ -21,7 +21,10 @@ exports.kelas = function (req, res) {
     console.log(req.body)
 
     var total = 0;
-    var sql = `SELECT a.id AS kelas_id, a.* FROM classes AS a`
+    var sql = `SELECT * FROM classes WHERE id IS NOT NULL`
+    if (req.query.id != undefined) {
+        sql = sql + ` AND id =` + req.query.id
+    }
     if (req.query.page != undefined && req.query.limit != undefined) {
         var page = req.query.page, limit = req.query.limit
         var offset = (page - 1) * limit;
@@ -46,36 +49,8 @@ exports.kelas = function (req, res) {
         }
     });
 };
-exports.get_kelas = function (req, res) {
-    perf.start();
-    console.log("date-time :" + new Date())
-    console.log("api-name : " + req.originalUrl)
-    console.log("body-sent : ")
-    console.log(req.body)
 
-    var total = 0;
-    var id = req.params.id;
-    connection.query('SELECT * FROM classes WHERE id =?', [id], function (error, result, fields) {
-        if (error) {
-            messages = "Internal server error";
-            elapseTime = perf.stop();
-            elapseTime = elapseTime.time.toFixed(2);
-            response.errorRes(500, elapseTime, messages, res);
-        } else {
-            result.forEach(element => {
-                element.created_at = dateFormat(element.created_at, "dd mmmm yyyy HH:MM:ss");
-                if (element.updated_at != "0000-00-00 00:00:00") element.updated_at = dateFormat(element.updated_at, "dd mmmm yyyy HH:MM:ss");
-                total = total + 1;
-            })
-            messages = "Success";
-            elapseTime = perf.stop();
-            elapseTime = elapseTime.time.toFixed(2);
-            response.successGet(elapseTime, messages, total, result, res);
-        }
-    });
-};
-
-exports.sub_kelas = function (req, res) {
+exports.section = function (req, res) {
     perf.start();
     console.log("date-time :" + new Date())
     console.log("api-name : " + req.originalUrl)
@@ -84,11 +59,11 @@ exports.sub_kelas = function (req, res) {
 
     var total = 0;
     var class_id = req.query.kelas_id
-    var sql = `SELECT a.id AS sub_kelas_id, a.class_id AS kelas_id,b.section AS kelas, b.created_at AS created_at, a.updated_at AS updated_at 
-    FROM class_sections AS a JOIN sections AS b on a.section_id = b.id WHERE a.class_id IS NOT NULL`
+    var sql = `SELECT * 
+    FROM sections WHERE id IS NOT NULL`
 
-    if (req.query.kelas_id != undefined) {
-        sql = sql + ` AND a.class_id =` + req.query.kelas_id
+    if (req.query.id != undefined) {
+        sql = sql + ` AND id =` + req.query.id
     }
     if (req.query.page != undefined && req.query.limit != undefined) {
         var page = req.query.page, limit = req.query.limit
@@ -116,6 +91,61 @@ exports.sub_kelas = function (req, res) {
         });
 
 };
+
+
+exports.class_section = function (req, res) {
+    perf.start();
+    console.log("date-time :" + new Date())
+    console.log("api-name : " + req.originalUrl)
+    console.log("body-sent : ")
+    console.log(req.body)
+
+    var total = 0;
+    var class_id = req.query.kelas_id
+    var sql = `SELECT a.* ,b.class as class, c.section as section
+    FROM class_sections AS a
+    JOIN classes AS b ON a.class_id=b.id
+    JOIN sections AS c ON a.section_id =c.id
+     WHERE a.id IS NOT NULL`
+
+    if (req.query.class_id != undefined) {
+        sql = sql + ` AND a.class_id =` + req.query.class_id
+    }
+    if (req.query.section_id != undefined) {
+        sql = sql + ` AND a.section_id =` + req.query.section_id
+    }
+    if (req.query.id != undefined) {
+        sql = sql + ` AND a.id =` + req.query.id
+    }
+    if (req.query.page != undefined && req.query.limit != undefined) {
+        var page = req.query.page, limit = req.query.limit
+        var offset = (page - 1) * limit;
+        sql = sql + ` LIMIT ` + offset + `, ` + limit
+    }
+    console.log(sql)
+    connection.query(sql,
+        function (error, result, fields) {
+            if (error) {
+                messages = "Internal server error";
+                elapseTime = perf.stop();
+                elapseTime = elapseTime.time.toFixed(2);
+                response.errorRes(500, elapseTime, messages, res);
+            } else {
+                result.forEach(element => {
+                    element.created_at = dateFormat(element.created_at, "dd mmmm yyyy HH:MM:ss");
+                    if (element.updated_at != "0000-00-00 00:00:00") element.updated_at = dateFormat(element.updated_at, "dd mmmm yyyy HH:MM:ss");
+                    total = total + 1;
+                })
+                messages = "Success";
+                elapseTime = perf.stop();
+                elapseTime = elapseTime.time.toFixed(2);
+                response.successGet(elapseTime, messages, total, result, res);
+            }
+        });
+
+};
+
+
 exports.get_sub_kelas = function (req, res) {
     perf.start();
     console.log("date-time :" + new Date())
@@ -148,7 +178,7 @@ exports.get_sub_kelas = function (req, res) {
 };
 
 
-exports.mata_pelajaran = function (req, res) {
+exports.subject = function (req, res) {
     perf.start();
     console.log("date-time :" + new Date())
     console.log("api-name : " + req.originalUrl)
@@ -156,58 +186,20 @@ exports.mata_pelajaran = function (req, res) {
     console.log(req.body)
 
     var total = 0;
-    if (req.query.sub_kelas_id == undefined) {
-        connection.query('SELECT * FROM subjects',
-            function (error, result, fields) {
-                if (error) {
-                    messages = "Internal server error";
-                    elapseTime = perf.stop();
-                    elapseTime = elapseTime.time.toFixed(2);
-                    response.errorRes(500, elapseTime, messages, res);
-                } else {
-                    result.forEach(element => {
-                        total = total + 1;
-                    })
-                    messages = "Success";
-                    elapseTime = perf.stop();
-                    elapseTime = elapseTime.time.toFixed(2);
-                    response.successGet(elapseTime, messages, total, result, res);
-                }
-            });
-    } else {
-        connection.query('SELECT a.id as id, a.session_id as session_id,a.subject_id as subject_id,a.teacher_id as teacher_id, b.name as name,b.code as code,b.type as type FROM `teacher_subjects` as a JOIN subjects as b ON a.subject_id = b.id where a.class_section_id =?',
-            [req.query.sub_kelas_id], function (error, result, fields) {
-                if (error) {
-                    messages = "Internal server error";
-                    elapseTime = perf.stop();
-                    elapseTime = elapseTime.time.toFixed(2);
-                    response.errorRes(500, elapseTime, messages, res);
-                } else {
-                    result.forEach(element => {
-                        total = total + 1;
-                    })
-                    messages = "Success";
-                    elapseTime = perf.stop();
-                    elapseTime = elapseTime.time.toFixed(2);
-                    response.successGet(elapseTime, messages, total, result, res);
-                }
-            });
-
+    var sql = `SELECT * FROM subjects WHERE id IS NOT NULL`
+    if (req.query.id != undefined) {
+        sql = sql + ` AND id =` + req.query.id
     }
-
-};
-
-exports.get_mata_pelajaran = function (req, res) {
-    perf.start();
-    console.log("date-time :" + new Date())
-    console.log("api-name : " + req.originalUrl)
-    console.log("body-sent : ")
-    console.log(req.body)
-
-    var total = 0;
-    var id = req.params.id;
-    connection.query('SELECT * FROM subjects WHERE id=?',
-        [id], function (error, result, fields) {
+    if (req.query.search != undefined) {
+        sql = sql + ` AND (name LIKE '%` + req.query.search + `%' OR code LIKE '%` + req.query.search + `%' OR type LIKE '%` + req.query.search + `%')`
+    }
+    if (req.query.page != undefined && req.query.limit != undefined) {
+        var page = req.query.page, limit = req.query.limit
+        var offset = (page - 1) * limit;
+        sql = sql + ` LIMIT ` + offset + `, ` + limit
+    }
+    connection.query(sql,
+        function (error, result, fields) {
             if (error) {
                 messages = "Internal server error";
                 elapseTime = perf.stop();
@@ -223,9 +215,10 @@ exports.get_mata_pelajaran = function (req, res) {
                 response.successGet(elapseTime, messages, total, result, res);
             }
         });
+
 };
 
-exports.jadwal = function (req, res) {
+exports.teacher_subject = function (req, res) {
     perf.start();
     console.log("date-time :" + new Date())
     console.log("api-name : " + req.originalUrl)
@@ -233,114 +226,65 @@ exports.jadwal = function (req, res) {
     console.log(req.body)
 
     var total = 0;
-    if (req.query.mata_pelajaran_id != undefined && req.query.sub_kelas_id != undefined) {
-        var sub_kelas_id = req.query.sub_kelas_id;
-        var mata_pelajaran_id = req.query.mata_pelajaran_id;
-        connection.query('SELECT * FROM `teacher_subjects` AS a JOIN subjects AS b ON a.subject_id = b.id JOIN timetables AS c ON a.id = c.teacher_subject_id WHERE a.class_section_id=? AND a.subject_id =?',
-            [sub_kelas_id, mata_pelajaran_id], function (error, result, fields) {
-                if (error) {
-                    messages = "Internal server error";
-                    elapseTime = perf.stop();
-                    elapseTime = elapseTime.time.toFixed(2);
-                    response.errorRes(500, elapseTime, messages, res);
-                } else {
-                    var dataArray = [];
-                    var data = {};
-                    result.forEach(element => {
-                        element.created_at = dateFormat(element.created_at, "dd mmmm yyyy HH:MM:ss");
-                        if (element.updated_at != "0000-00-00 00:00:00") element.updated_at = dateFormat(element.updated_at, "dd mmmm yyyy HH:MM:ss");
-                        total = total + 1;
-                        if (data.jadwal == element.name) {
-                            data.desc = {
+    var sql = `SELECT *     
+    FROM teacher_subjects AS a 
+    JOIN subjects AS b ON a.subject_id = b.id 
+    #JOIN staff AS c ON a.teacher_id= c.id 
+    JOIN class_sections AS d ON a.class_section_id = d.id 
+    #JOIN classes AS e ON d.class_id= e.id
+    #JOIN sections AS f ON d.section_id= f.id 
+    WHERE a.id IS NOT NULL`
+    if (req.query.class_section_id != undefined) {
+        sql = sql + ' AND a.class_section_id=' + req.query.class_section_id
+    }
+    if (req.query.subject_id != undefined) {
+        sql = sql + ' AND a.subject_id=' + req.query.subject_id
+    }
+    if (req.query.teacher_id != undefined) {
+        sql = sql + ' AND a.teacher_id=' + req.query.teacher_id
+    }
+    connection.query(sql,
+        function (error, result, fields) {
+            if (error) {
+                messages = "Internal server error";
+                elapseTime = perf.stop();
+                elapseTime = elapseTime.time.toFixed(2);
+                response.errorRes(500, elapseTime, messages, res);
+            } else {
+                var dataArray = [];
+                var data = {};
+                result.forEach(element => {
+                    element.created_at = dateFormat(element.created_at, "dd mmmm yyyy HH:MM:ss");
+                    if (element.updated_at != "0000-00-00 00:00:00") element.updated_at = dateFormat(element.updated_at, "dd mmmm yyyy HH:MM:ss");
+                    total = total + 1;
+                    if (data.jadwal == element.name) {
+                        data.desc = {
+                            "day_name": element.day_name,
+                            "start_time": element.start_time,
+                            "end_time": element.end_time
+
+                        }
+                    } else {
+                        data = {
+                            "jadwal": element.name,
+                            "desc": {
                                 "day_name": element.day_name,
                                 "start_time": element.start_time,
                                 "end_time": element.end_time
                             }
-                        } else {
-                            data = {
-                                "jadwal": element.name,
-                                "desc": {
-                                    "day_name": element.day_name,
-                                    "start_time": element.start_time,
-                                    "end_time": element.end_time
-                                }
-                            };
-                        }
-                        dataArray.push(data);
-                        // //console.log(data);
+                        };
+                    }
+                    dataArray.push(data);
+                    // //console.log(data);
 
-                    })
-                    //console.log(dataArray);
-                    messages = "Success";
-                    elapseTime = perf.stop();
-                    elapseTime = elapseTime.time.toFixed(2);
-                    response.successGet(elapseTime, messages, total, result, res);
-                }
-            });
-    }
-    else if (req.query.sub_kelas_id != undefined) {
-        var sub_kelas_id = req.query.sub_kelas_id;
-        connection.query('SELECT * FROM `teacher_subjects` AS a JOIN subjects AS b ON a.subject_id = b.id JOIN timetables AS c ON a.id = c.teacher_subject_id WHERE a.class_section_id=?',
-            [sub_kelas_id], function (error, result, fields) {
-                if (error) {
-                    messages = "Internal server error";
-                    elapseTime = perf.stop();
-                    elapseTime = elapseTime.time.toFixed(2);
-                    response.errorRes(500, elapseTime, messages, res);
-                } else {
-                    var dataArray = [];
-                    var data = {};
-                    result.forEach(element => {
-                        element.created_at = dateFormat(element.created_at, "dd mmmm yyyy HH:MM:ss");
-                        if (element.updated_at != "0000-00-00 00:00:00") element.updated_at = dateFormat(element.updated_at, "dd mmmm yyyy HH:MM:ss");
-                        total = total + 1;
-                        if (data.jadwal == element.name) {
-                            data.desc = {
-                                "day_name": element.day_name,
-                                "start_time": element.start_time,
-                                "end_time": element.end_time
-
-                            }
-                        } else {
-                            data = {
-                                "jadwal": element.name,
-                                "desc": {
-                                    "day_name": element.day_name,
-                                    "start_time": element.start_time,
-                                    "end_time": element.end_time
-                                }
-                            };
-                        }
-                        dataArray.push(data);
-                        // //console.log(data);
-
-                    })
-                    //console.log(dataArray);
-                    messages = "Success";
-                    elapseTime = perf.stop();
-                    elapseTime = elapseTime.time.toFixed(2);
-                    response.successGet(elapseTime, messages, total, result, res);
-                }
-            });
-    } else {
-        connection.query('SELECT * FROM `teacher_subjects` AS a JOIN subjects AS b ON a.subject_id = b.id JOIN timetables AS c ON a.id = c.teacher_subject_id',
-            function (error, result, fields) {
-                if (error) {
-                    messages = "Internal server error";
-                    elapseTime = perf.stop();
-                    elapseTime = elapseTime.time.toFixed(2);
-                    response.errorRes(500, elapseTime, messages, res);
-                } else {
-                    result.forEach(element => {
-                        total = total + 1;
-                    })
-                    messages = "Success";
-                    elapseTime = perf.stop();
-                    elapseTime = elapseTime.time.toFixed(2);
-                    response.successGet(elapseTime, messages, total, result, res);
-                }
-            });
-    }
+                })
+                //console.log(dataArray);
+                messages = "Success";
+                elapseTime = perf.stop();
+                elapseTime = elapseTime.time.toFixed(2);
+                response.successGet(elapseTime, messages, total, result, res);
+            }
+        });
 };
 
 exports.get_jadwal = function (req, res) {
