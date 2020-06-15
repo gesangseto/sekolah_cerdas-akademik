@@ -64,7 +64,7 @@ exports.getSectionClass = async function (req, res) {
     FROM class_sections AS a 
     JOIN classes AS b ON a.class_id=b.id
      JOIN sections AS c ON a.section_id=c.id
-     WHERE a.id IS NOT NULL `
+     WHERE b.is_active = 'yes' AND c.is_active='yes' `
     if (req.query.is_active != undefined) {
         sql = sql + ` AND a.is_active='` + req.query.is_active + `'`
     } else {
@@ -82,12 +82,20 @@ exports.getSectionClass = async function (req, res) {
     if (req.query.page != undefined && req.query.limit != undefined) {
         var page = req.query.page, limit = req.query.limit
         var offset = (page - 1) * limit;
-        sql = sql + ` LIMIT ` + offset + `, ` + limit
+        var get_group_kelas = `SELECT a.id as class_id,a.class as class
+        FROM classes AS a 
+        JOIN class_sections AS b ON a.id=b.class_id
+         WHERE a.is_active = 'yes' GROUP BY a.class LIMIT ` + offset + `, ` + limit
+    } else {
+        var get_group_kelas = `SELECT a.id as class_id,a.class as class
+        FROM classes AS a 
+        JOIN class_sections AS b ON a.id=b.class_id
+         WHERE a.is_active = 'yes' GROUP BY a.class `
     }
     // sql = sql + ` ORDER BY a.class_id ASC`
     var get_kelas = await Query(sql)
 
-    let get_group_kelas = sql + ` GROUP BY a.class_id`;
+    // let get_group_kelas = sql + ` GROUP BY a.class_id`;
     console.log(get_group_kelas)
     var get_group = await new Promise((resolve) =>
         connection.query(get_group_kelas, function (error, rows) {

@@ -61,6 +61,25 @@ module.exports = function (app) {
     // app.route('/akademik/guru_mata_pelajaran')
     //     .delete(guru_mata_pelajaran.delete_guru_mata_pelajaran);
 
+
+
+    // // Mempromosikan siswa
+    var mempromosikan_siswa = require('./controller/mempromosikan-siswa');
+    app.route('/akademik/mempromosikan-siswa/kelas')
+        .get(mempromosikan_siswa.getKelas);
+    app.route('/akademik/mempromosikan-siswa/sub-kelas')
+        .get(mempromosikan_siswa.getSubKelas);
+    app.route('/akademik/mempromosikan-siswa/sub-kelas')
+        .get(mempromosikan_siswa.getSubKelas);
+    app.route('/akademik/mempromosikan-siswa')
+        .get(mempromosikan_siswa.getMempromosikanSiswa);
+    app.route('/akademik/mempromosikan-siswa')
+        .put(mempromosikan_siswa.insertMempromosikanSiswa);
+    // app.route('/akademik/mempromosikan-siswa')
+    //     .post(mempromosikan_siswa.updateMataPelajaran);
+    // app.route('/akademik/mempromosikan-siswa')
+    //     .delete(mempromosikan_siswa.deleteMataPelajaran);
+
     // // Daftar Mata Pelajaran
     var daftar_mata_pelajaran = require('./controller/daftar-mata-pelajaran');
     app.route('/akademik/daftar-mata-pelajaran')
